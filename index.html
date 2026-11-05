@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Boozely</title>
+    <script>
+      (function () {
+        var ua = navigator.userAgent;
+        // iPadOS reports itself as a Mac; touch support tells them apart.
+        var isIOS =
+          /iPhone|iPad|iPod/.test(ua) ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        if (isIOS) location.replace("https://apps.apple.com/app/id6829445916");
+        else if (/Android/.test(ua))
+          location.replace("https://play.google.com/store/apps/details?id=com.drunkler.drunkly");
+      })();
+    </script>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        padding: 16px;
+        box-sizing: border-box;
+        background: linear-gradient(135deg, #4a0080, #001428);
+        color: #fff;
+        font-family: system-ui, sans-serif;
+      }
+      h1 {
+        margin: 0 0 8px;
+      }
+      a {
+        width: 220px;
+        padding: 14px 0;
+        border: 2px solid #aaff00;
+        border-radius: 12px;
+        color: #aaff00;
+        font-weight: 600;
+        text-align: center;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Boozely</h1>
+    <a href="https://play.google.com/store/apps/details?id=com.drunkler.drunkly">Google Play</a>
+    <a href="https://apps.apple.com/app/id6829445916">App Store</a>
+  </body>
+</html>
