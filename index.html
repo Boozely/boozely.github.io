@@ -4,51 +4,291 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Boozely</title>
+    <link rel="icon" href="assets/hat.png" />
+    <style>
+      @font-face {
+        font-family: "Boogaloo";
+        src: url("assets/Boogaloo-Regular.ttf");
+        font-display: swap;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px;
+        overflow-x: hidden;
+        background: linear-gradient(135deg, #4a0080, #001428);
+        color: #fff;
+        font-family: "Boogaloo", system-ui, sans-serif;
+        text-align: center;
+      }
+      #deck {
+        position: relative;
+        width: 280px;
+        height: 215px;
+        padding: 0;
+        border: 0;
+        background: none;
+        font: inherit;
+        cursor: pointer;
+      }
+      .card {
+        position: absolute;
+        left: 72px;
+        top: 20px;
+        width: 136px;
+        height: 170px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 14px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        transform: translateX(var(--x)) rotate(var(--r));
+        animation: deal 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+        animation-delay: var(--d);
+        transition: transform 0.25s;
+      }
+      .card:nth-child(1) {
+        --x: -66px;
+        --r: -20deg;
+        --d: 0s;
+        background: #c9a227;
+      }
+      .card:nth-child(2) {
+        --x: 66px;
+        --r: 20deg;
+        --d: 0.1s;
+        background: #2e7d32;
+      }
+      .card:nth-child(3) {
+        --x: -30px;
+        --r: -9deg;
+        --d: 0.2s;
+        background: #0277bd;
+      }
+      .card:nth-child(4) {
+        --x: 30px;
+        --r: 9deg;
+        --d: 0.3s;
+        background: #c62828;
+      }
+      .card:nth-child(5) {
+        --x: 0px;
+        --r: 0deg;
+        --d: 0.4s;
+        top: 12px;
+      }
+      .back {
+        border: 1.5px solid #aaff00;
+        background: #1c1c2e;
+      }
+      .back svg {
+        width: 96px;
+      }
+      #deck.shuffle .card {
+        transform: translateX(0) rotate(var(--r));
+      }
+      @keyframes deal {
+        from {
+          opacity: 0;
+          transform: translateY(-120vh) rotate(180deg);
+        }
+      }
+      h1 {
+        margin: 12px 0 0;
+        font-size: 64px;
+        font-weight: 400;
+        line-height: 1;
+        color: #aaff00;
+      }
+      #tagline {
+        margin: 4px 0 0;
+        font-size: 26px;
+      }
+      #line {
+        min-height: 28px;
+        margin: 18px 0 24px;
+        font-size: 22px;
+        color: rgba(255, 255, 255, 0.7);
+        animation: pop 0.25s;
+      }
+      @keyframes pop {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+      }
+      #stores {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+      }
+      #stores a {
+        width: 170px;
+        padding: 12px 0;
+        border-radius: 12px;
+        background: #aaff00;
+        color: #2a0050;
+        font-size: 22px;
+        text-decoration: none;
+        transition: transform 0.15s;
+      }
+      #stores a:hover {
+        transform: scale(1.06) rotate(-2deg);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .card,
+        #line {
+          animation: none;
+        }
+        .card,
+        #stores a {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button id="deck" type="button" aria-label="Boozely">
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card back">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 36 23"><path fill="#aaff00" d="M17.992 14.407c1.072-3.465 2.648-4.706 4.31-5.874-.91-4.097.934-6.254 4.832-6.774-3.936-3.53-11.508-1.836-12.978 5.898 2.012 2.065 2.872 3.515 3.836 6.75M29.052 1.16a2.131 2.131 0 1 1-.52 4.23 2.131 2.131 0 0 1 .52-4.23m-1.04.684a.757.757 0 1 0-.184 1.503.757.757 0 0 0 .185-1.503M32.802 14.842a2.132 2.132 0 1 1 2.132 3.693 2.132 2.132 0 0 1-2.132-3.693m1.74.362a.758.758 0 1 0-1.312.758.758.758 0 0 0 1.313-.758M25.074 18.243c.477.182.661.296.687.545.018 1.36-.027 2.024-.166 3.102-.147.224-.267.292-.521.355-5.765-1.195-8.85-1.165-14.116 0-.299-.03-.413-.107-.52-.355-.165-1.2-.227-1.877-.19-3.102.072-.28.22-.401.71-.545 5.486-1.526 8.575-1.452 14.116 0M.94 13.783a2.132 2.132 0 1 1 2.383 3.535A2.132 2.132 0 0 1 .94 13.783m1.761.24a.758.758 0 1 0-1.255.848.758.758 0 0 0 1.255-.848"/><path fill="#aaff00" d="M17.661 16.49c-2.88.142-4.472.387-7.247 1.28-.105-7.314-5.684-8.746-8.266-4.453-.454-10.41 14.657-9.707 15.513 3.174M25.571 17.817c-2.652-.924-4.26-1.205-7.295-1.374 1.24-11.516 16.011-10.667 15.585-1.99-2.427-3.649-7.845-2.418-8.29 3.364"/></svg>
+      </div>
+    </button>
+    <h1>Boozely</h1>
+    <p id="tagline">Cards, chaos &amp; cocktails!</p>
+    <p id="line" aria-live="polite"></p>
+    <div id="stores">
+      <a href="https://play.google.com/store/apps/details?id=com.drunkler.drunkly">Google Play</a>
+      <a href="https://apps.apple.com/app/id6829445916">App Store</a>
+    </div>
     <script>
       (function () {
+        var PLAY = "https://play.google.com/store/apps/details?id=com.drunkler.drunkly";
+        var APP_STORE = "https://apps.apple.com/app/id6829445916";
+        var LINE_MS = 2600;
+        // Tagline: first line of the store descriptions. Lines: the app's Home screen sentences.
+        var COPY = {
+          en: {
+            tagline: "Cards, chaos & cocktails!",
+            shuffling: "Shuffling the deck...",
+            lines: [
+              "Time to mix it up!",
+              "Who's up for a challenge?",
+              "Oh, hi Mark!",
+              "YEEHA",
+              "It's a shoe!",
+              "No sleeping before midnight",
+              "I'll see you in 20 nuggets",
+              "This app is slightly better",
+              "Big brain time!",
+              "Don't drink and drive.",
+            ],
+          },
+          fr: {
+            tagline: "Des cartes, des potes et des cocktails !",
+            shuffling: "On mélange les cartes...",
+            lines: [
+              "Il est temps de mélanger !",
+              "Qui est prêt pour un défi ?",
+              "J'adore le concept",
+              "YOUPIII !",
+              "La secte des mollets",
+              "Interdit de dormir avant minuit",
+              "On se retrouve dans 20 nuggets",
+              "Cette appli est un peu meilleure",
+              "Ne pas boire et conduire.",
+            ],
+          },
+          es: {
+            tagline: "¡Cartas, caos y cócteles!",
+            shuffling: "Barajando las cartas...",
+            lines: [
+              "¡Hora de mezclar!",
+              "¿Quién acepta el reto?",
+              "¡Buenas, campeón!",
+              "¡VIVA!",
+              "¡Es un zapato!",
+              "Prohibido dormir antes de medianoche",
+              "Nos vemos en 20 nuggets",
+              "Esta app es ligeramente mejor",
+              "No bebas y conduzcas.",
+            ],
+          },
+          it: {
+            tagline: "Carte, caos e cocktail!",
+            shuffling: "Sto mescolando le carte...",
+            lines: [
+              "È ora di mescolare!",
+              "Chi accetta la sfida?",
+              "Ciao, campione!",
+              "EVVIVA!",
+              "È una scarpa!",
+              "Vietato dormire prima di mezzanotte",
+              "Ci vediamo tra 20 nuggets",
+              "Questa app è leggermente migliore",
+              "Non bere e guidare.",
+            ],
+          },
+        };
+
+        var lang = (navigator.language || "en").slice(0, 2);
+        var copy = COPY[lang] || COPY.en;
+        document.documentElement.lang = COPY[lang] ? lang : "en";
+
         var ua = navigator.userAgent;
         // iPadOS reports itself as a Mac; touch support tells them apart.
         var isIOS =
           /iPhone|iPad|iPod/.test(ua) ||
           (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-        if (isIOS) location.replace("https://apps.apple.com/app/id6829445916");
-        else if (/Android/.test(ua))
-          location.replace("https://play.google.com/store/apps/details?id=com.drunkler.drunkly");
+        var store = isIOS ? APP_STORE : /Android/.test(ua) ? PLAY : null;
+        var preview = location.search.indexOf("stay") !== -1;
+
+        var line = document.getElementById("line");
+        var deck = document.getElementById("deck");
+        var next = Math.floor(Math.random() * copy.lines.length);
+
+        function show(text) {
+          line.textContent = text;
+          line.style.animation = "none";
+          void line.offsetWidth;
+          line.style.animation = "";
+        }
+
+        function drawLine() {
+          show(copy.lines[next]);
+          next = (next + 1) % copy.lines.length;
+        }
+
+        document.getElementById("tagline").textContent = copy.tagline;
+
+        if (store && !preview) {
+          show(copy.shuffling);
+          location.replace(store);
+        } else {
+          drawLine();
+          setInterval(drawLine, LINE_MS);
+        }
+
+        deck.addEventListener("click", function () {
+          deck.classList.add("shuffle");
+          setTimeout(function () {
+            deck.classList.remove("shuffle");
+          }, 250);
+          if (!store || preview) drawLine();
+        });
       })();
     </script>
-    <style>
-      body {
-        margin: 0;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
-        padding: 16px;
-        box-sizing: border-box;
-        background: linear-gradient(135deg, #4a0080, #001428);
-        color: #fff;
-        font-family: system-ui, sans-serif;
-      }
-      h1 {
-        margin: 0 0 8px;
-      }
-      a {
-        width: 220px;
-        padding: 14px 0;
-        border: 2px solid #aaff00;
-        border-radius: 12px;
-        color: #aaff00;
-        font-weight: 600;
-        text-align: center;
-        text-decoration: none;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Boozely</h1>
-    <a href="https://play.google.com/store/apps/details?id=com.drunkler.drunkly">Google Play</a>
-    <a href="https://apps.apple.com/app/id6829445916">App Store</a>
   </body>
 </html>
